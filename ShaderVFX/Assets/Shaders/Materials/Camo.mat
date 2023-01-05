@@ -81,7 +81,7 @@ Material:
     - _OcclusionStrength: 1
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _Size: 8
+    - _Size: 3.2
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
@@ -90,7 +90,7 @@ Material:
     - _Surface: 0
     - _WorkflowMode: 1
     - _ZWrite: 1
-    - _dissolveRate: 0
+    - _dissolveRate: -1
     - _staticLook: 11
     m_Colors:
     - Color_BDD429A3: {r: 1, g: 0.4448824, b: 0, a: 1}
@@ -102,8 +102,8 @@ Material:
     - _Color1: {r: 1, g: 1, b: 1, a: 1}
     - _Color2: {r: 0.10769605, g: 1, b: 0, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _MinMax1: {r: 100.5, g: 2, b: 0, a: 0}
-    - _MinMax2: {r: 126.1, g: 1, b: 0, a: 0}
+    - _MinMax1: {r: 116.51, g: 2, b: 0, a: 0}
+    - _MinMax2: {r: 103.8, g: 1, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &6471160676154048945
