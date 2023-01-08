@@ -41,6 +41,7 @@ TextureImporter:
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
+  vTOnly: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -49,12 +50,12 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: -1
-    aniso: -1
-    mipBias: -100
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
     wrapU: 1
     wrapV: 1
-    wrapW: -1
+    wrapW: 0
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
@@ -72,9 +73,12 @@ TextureImporter:
   textureType: 8
   textureShape: 1
   singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
   maxTextureSizeSet: 0
   compressionQualitySet: 0
   textureFormatSet: 0
+  ignorePngGamma: 0
   applyGammaDecoding: 0
   platformSettings:
   - serializedVersion: 3
@@ -144,12 +148,12 @@ TextureImporter:
       name: A1_0
       rect:
         serializedVersion: 2
-        x: 13
-        y: 939
-        width: 123
-        height: 123
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 0
+        y: 652
+        width: 160
+        height: 148
+      alignment: 1
+      pivot: {x: 0, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -165,12 +169,12 @@ TextureImporter:
       name: A1_1
       rect:
         serializedVersion: 2
-        x: 179
-        y: 938
-        width: 123
-        height: 123
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 160
+        y: 652
+        width: 160
+        height: 148
+      alignment: 1
+      pivot: {x: 0, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -186,12 +190,12 @@ TextureImporter:
       name: A1_2
       rect:
         serializedVersion: 2
-        x: 345
-        y: 941
-        width: 123
-        height: 123
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 320
+        y: 652
+        width: 160
+        height: 148
+      alignment: 1
+      pivot: {x: 0, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -207,12 +211,12 @@ TextureImporter:
       name: A1_3
       rect:
         serializedVersion: 2
-        x: 514
-        y: 945
-        width: 123
-        height: 123
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 480
+        y: 652
+        width: 160
+        height: 148
+      alignment: 1
+      pivot: {x: 0, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -228,12 +232,12 @@ TextureImporter:
       name: A1_4
       rect:
         serializedVersion: 2
-        x: 676
-        y: 941
-        width: 123
-        height: 123
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 640
+        y: 652
+        width: 160
+        height: 148
+      alignment: 1
+      pivot: {x: 0, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -241,27 +245,6 @@ TextureImporter:
       bones: []
       spriteID: 784747ccce26dccc0800000000000000
       internalID: -3689183750564580217
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: A1_5
-      rect:
-        serializedVersion: 2
-        x: 820
-        y: 938
-        width: 123
-        height: 123
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 4635c1731c1eebdb0800000000000000
-      internalID: -4774130334996606108
       vertices: []
       indices: 
       edges: []
