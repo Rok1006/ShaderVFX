@@ -57,6 +57,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - AlphaClipThreshold: 0
     - Boolean_483cc1163c284234a2d5415ea1bb93b8: 0
     - Boolean_b3233a9914ba400ca7b533a45eaf48a2: 0
     - Vector1_2a07e42c756147fa818583f4cc213d55: 1

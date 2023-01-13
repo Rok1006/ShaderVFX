@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - BombGuy
+  - Enemy
+  - Target
+  - Projectile
   layers:
   - Default
   - TransparentFX

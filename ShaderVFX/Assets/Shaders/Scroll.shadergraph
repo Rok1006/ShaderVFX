@@ -7153,7 +7153,7 @@
     },
     "m_Name": "AlphaClipThreshold",
     "m_DefaultReferenceName": "Vector1_bdb35f599777466283ebbc1ae19bdc6d",
-    "m_OverrideReferenceName": "",
+    "m_OverrideReferenceName": "AlphaClipThreshold",
     "m_GeneratePropertyBlock": true,
     "m_Precision": 0,
     "overrideHLSLDeclaration": false,
