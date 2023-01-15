@@ -20,6 +20,16 @@ public class Ability_Garna : MonoBehaviour
     [Header("Ability_AmberDust")]
     [SerializeField] private KeyCode input_AmberDust;
     [SerializeField] private GameObject amberDust;
+
+    [Header("Ability_DashOfVengenance")]
+    [SerializeField] private KeyCode input_DashOVen;
+    [SerializeField] private GameObject origin;
+    [SerializeField] private GameObject attackPt;
+    [SerializeField] private GameObject lance;
+    Animator lanceAnim;
+    private GameObject target;
+    [SerializeField] private int speed;
+    bool moveForward = false;
     void Start()
     {
     //   needle[0] = needlePack.transform.GetChild(0).gameObject;  
@@ -33,6 +43,8 @@ public class Ability_Garna : MonoBehaviour
         amberDust.SetActive(false);
         sparkRing.SetActive(false);
         stingRemain.SetActive(false);
+
+        lanceAnim = lance.GetComponent<Animator>();
     }
 
     void Update()
@@ -43,7 +55,10 @@ public class Ability_Garna : MonoBehaviour
         if(Input.GetKeyDown(input_AmberDust)){
             StartCoroutine("AmberDust"); 
         }
-
+        if(Input.GetKeyDown(input_DashOVen)){
+            StartCoroutine("DashOfVengence"); 
+        }
+//-----------------------
         if(needle.Count>0&&needle[0]!=null&&needle[0].GetComponent<Stinger>().arrived){
             Debug.Log("penetrate");
             // stingerHitEffect.transform.position = effectPt.transform.position;
@@ -53,6 +68,12 @@ public class Ability_Garna : MonoBehaviour
             stingRemain.SetActive(true);
             HitEffect.Add(e);
             needle[0].GetComponent<Stinger>().arrived = false;
+        }
+        if(moveForward){
+            Move();
+            if(this.transform.position == target.transform.position){
+                moveForward = false;
+            }
         }
     }
 
@@ -94,10 +115,25 @@ public class Ability_Garna : MonoBehaviour
     }
     IEnumerator DashOfVengence(){
         yield return new WaitForSeconds(0f);
+        target = attackPt;
+        moveForward = true;
+        //target = origin;
+        yield return new WaitForSeconds(.3f);
+        // if(this.transform.position == target.transform.position){
+        lanceAnim.SetTrigger("Swing");
+        yield return new WaitForSeconds(.3f);
+        // }
     }
+    void Move(){
+        float step = speed * Time.deltaTime;
+        this.transform.position = Vector3.MoveTowards(this.transform.position, target.transform.position, step);
+    }
+    
     IEnumerator BloomingGold(){
         yield return new WaitForSeconds(0f);
     }
+
+    
 
     // public void Project(GameObject i){
 
