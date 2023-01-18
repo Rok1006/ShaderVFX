@@ -22,14 +22,23 @@ public class Ability_Garna : MonoBehaviour
     [SerializeField] private GameObject amberDust;
 
     [Header("Ability_DashOfVengenance")]
+    int state = 0;
     [SerializeField] private KeyCode input_DashOVen;
     [SerializeField] private GameObject origin;
+    [SerializeField] private GameObject midPt;
     [SerializeField] private GameObject attackPt;
+    [SerializeField] private GameObject lanceSwingObj;
     [SerializeField] private GameObject lance;
+    [SerializeField] private GameObject slashV1;
+    [SerializeField] private GameObject slashV2;
+    [SerializeField] private GameObject slashV2_2;
+    [SerializeField] private GameObject DV_HitEffect;
     Animator lanceAnim;
     private GameObject target;
     [SerializeField] private int speed;
+    [SerializeField] private int V2_speed;
     bool moveForward = false;
+    public bool slashOut = false;
     void Start()
     {
     //   needle[0] = needlePack.transform.GetChild(0).gameObject;  
@@ -43,6 +52,10 @@ public class Ability_Garna : MonoBehaviour
         amberDust.SetActive(false);
         sparkRing.SetActive(false);
         stingRemain.SetActive(false);
+        slashV1.SetActive(false);
+        slashV2.SetActive(false);
+        slashV2_2.SetActive(false);
+        //DV_HitEffect.SetActive(false);
 
         lanceAnim = lance.GetComponent<Animator>();
     }
@@ -56,7 +69,12 @@ public class Ability_Garna : MonoBehaviour
             StartCoroutine("AmberDust"); 
         }
         if(Input.GetKeyDown(input_DashOVen)){
-            StartCoroutine("DashOfVengence"); 
+            if(state==0){
+                StartCoroutine("DashOfVengence_V1");  
+            }else{
+                StartCoroutine("DashOfVengence_V2"); 
+            }
+            
         }
 //-----------------------
         if(needle.Count>0&&needle[0]!=null&&needle[0].GetComponent<Stinger>().arrived){
@@ -74,6 +92,9 @@ public class Ability_Garna : MonoBehaviour
             if(this.transform.position == target.transform.position){
                 moveForward = false;
             }
+        }
+        if(slashOut){
+            SlashOut();
         }
     }
 
@@ -113,7 +134,8 @@ public class Ability_Garna : MonoBehaviour
         yield return new WaitForSeconds(15f);
         amberDust.SetActive(false);
     }
-    IEnumerator DashOfVengence(){
+    IEnumerator DashOfVengence_V1(){
+        lanceSwingObj.transform.rotation = Quaternion.Euler(-17.863f, 0f, 0f);
         yield return new WaitForSeconds(0f);
         target = attackPt;
         moveForward = true;
@@ -121,12 +143,39 @@ public class Ability_Garna : MonoBehaviour
         yield return new WaitForSeconds(.3f);
         // if(this.transform.position == target.transform.position){
         lanceAnim.SetTrigger("Swing");
-        yield return new WaitForSeconds(.3f);
+        yield return new WaitForSeconds(1f);
+        state = 1;
         // }
+    }
+    IEnumerator DashOfVengence_V2(){
+        lanceSwingObj.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+        yield return new WaitForSeconds(0f);
+        target = midPt;
+        moveForward = true;
+        yield return new WaitForSeconds(.05f);
+        lanceAnim.SetTrigger("BackSwing");
+        slashV2.SetActive(true);
+        yield return new WaitForSeconds(1f);
+        ResetDashOfVengence();
+    }
+    void ResetDashOfVengence(){
+        target=origin;
+        state = 0;
+        moveForward = true;
+        slashOut = false;
+        lanceAnim.SetTrigger("Reset");
+        slashV1.SetActive(false);
+        slashV2.SetActive(false);
+        slashV2_2.SetActive(false);
+        DV_HitEffect.SetActive(false);
+        slashV2.transform.position = this.transform.position;
     }
     void Move(){
         float step = speed * Time.deltaTime;
         this.transform.position = Vector3.MoveTowards(this.transform.position, target.transform.position, step);
+    }
+    void SlashOut(){
+        slashV2.transform.Translate(Vector3.left * V2_speed * Time.deltaTime);
     }
     
     IEnumerator BloomingGold(){
