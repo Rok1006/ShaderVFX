@@ -4,6 +4,8 @@ using UnityEngine;
 //This script is for all effect
 public class Ability_Garna : MonoBehaviour
 {
+    [SerializeField] private GameObject Lines_BK;
+    [SerializeField] private GameObject Lines_FR;
     [Header("Ability_Stinger")]
     [SerializeField] private KeyCode input_Stinger;
     [SerializeField] private GameObject needlePack; //needle prefab
@@ -13,9 +15,10 @@ public class Ability_Garna : MonoBehaviour
     public GameObject stingerHitEffect; //enemy get hit effect
     [SerializeField] private GameObject effectPt;
     public List<GameObject> HitEffect = new List<GameObject>();
-    [SerializeField] private GameObject pedalBurst;
+    //[SerializeField] private GameObject pedalBurst;
     [SerializeField] private GameObject sparkRing;
-    [SerializeField] private GameObject stingRemain;
+    //[SerializeField] private GameObject stingRemain;
+    [SerializeField] private GameObject ST_HitEffect;
 
     [Header("Ability_AmberDust")]
     [SerializeField] private KeyCode input_AmberDust;
@@ -33,29 +36,28 @@ public class Ability_Garna : MonoBehaviour
     [SerializeField] private GameObject slashV2;
     [SerializeField] private GameObject slashV2_2;
     [SerializeField] private GameObject DV_HitEffect;
+    [SerializeField] private GameObject DV_HitEffect_2;
     Animator lanceAnim;
     private GameObject target;
     [SerializeField] private int speed;
     [SerializeField] private int V2_speed;
     bool moveForward = false;
     public bool slashOut = false;
+
+    [Header("Ability_BloomingGold_V1")]
+    [SerializeField] private KeyCode input_BloomingGold_v1;
+
     void Start()
     {
-    //   needle[0] = needlePack.transform.GetChild(0).gameObject;  
-    //   needle[1] = needlePack.transform.GetChild(1).gameObject; 
-    //   needle[2] = needlePack.transform.GetChild(2).gameObject;   
-    //   needle[0].SetActive(true);
-    //   needle[1].SetActive(true);
-    //   needle[2].SetActive(true);
-        //stingerHitEffect.SetActive(false);
-        pedalBurst.SetActive(false);
+        ST_HitEffect.SetActive(false);
         amberDust.SetActive(false);
         sparkRing.SetActive(false);
-        stingRemain.SetActive(false);
         slashV1.SetActive(false);
         slashV2.SetActive(false);
         slashV2_2.SetActive(false);
-        //DV_HitEffect.SetActive(false);
+        DV_HitEffect_2.SetActive(false);
+        Lines_BK.SetActive(false);
+        Lines_FR.SetActive(false);
 
         lanceAnim = lance.GetComponent<Animator>();
     }
@@ -71,8 +73,10 @@ public class Ability_Garna : MonoBehaviour
         if(Input.GetKeyDown(input_DashOVen)){
             if(state==0){
                 StartCoroutine("DashOfVengence_V1");  
+                Lines_BK.SetActive(true);
             }else{
-                StartCoroutine("DashOfVengence_V2"); 
+                StartCoroutine("DashOfVengence_V2");
+                Lines_FR.SetActive(true);
             }
             
         }
@@ -82,8 +86,8 @@ public class Ability_Garna : MonoBehaviour
             // stingerHitEffect.transform.position = effectPt.transform.position;
             // stingerHitEffect.SetActive(true);
             GameObject e = Instantiate(stingerHitEffect, effectPt.transform.position, Quaternion.identity);
-            pedalBurst.SetActive(true);
-            stingRemain.SetActive(true);
+            ST_HitEffect.SetActive(true);
+            //stingRemain.SetActive(true);
             HitEffect.Add(e);
             needle[0].GetComponent<Stinger>().arrived = false;
         }
@@ -123,9 +127,9 @@ public class Ability_Garna : MonoBehaviour
         needle.TrimExcess();
         needle.Clear();
         Destroy(s);
-        pedalBurst.SetActive(false);
+        ST_HitEffect.SetActive(false);
         sparkRing.SetActive(false);
-        stingRemain.SetActive(false);
+        //stingRemain.SetActive(false);
          //s.shoot out in order
     }
     IEnumerator AmberDust(){
@@ -168,7 +172,10 @@ public class Ability_Garna : MonoBehaviour
         slashV2.SetActive(false);
         slashV2_2.SetActive(false);
         DV_HitEffect.SetActive(false);
+        DV_HitEffect_2.SetActive(false);
         slashV2.transform.position = this.transform.position;
+        Lines_BK.SetActive(false);
+        Lines_FR.SetActive(false);
     }
     void Move(){
         float step = speed * Time.deltaTime;
