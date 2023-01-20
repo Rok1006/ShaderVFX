@@ -4,25 +4,42 @@ using UnityEngine;
 //For Calling effects
 public class EffectTrigger : MonoBehaviour
 {
-    [SerializeField] private Ability_Garna AG;
-    [SerializeField] private GameObject Slash;
-    [SerializeField] private GameObject DV_VFX;
-    [SerializeField] private GameObject DV_VFX_Stay;
 
+    [SerializeField] private GameObject AGObj;
+    private Ability_Garna AG;
+
+    void Awake() {
+       AGObj = GameObject.FindGameObjectWithTag("Player");
+       AG = AGObj.GetComponent<Ability_Garna>();
+    }
     void Start()
     {
-        Slash.SetActive(false);
-        DV_VFX.SetActive(false);
-        DV_VFX_Stay.SetActive(false);
+        AG.slashV1.SetActive(false);
+        AG.DV_HitEffect.SetActive(false);
+        AG.slashV2_2.SetActive(false);
+        // if(AG.Flower.Count>0){
+        //     AG.Flower[0].transform.GetChild(1).gameObject.SetActive(false);
+        //     AG.Flower[1].transform.GetChild(1).gameObject.SetActive(false);
+        //     AG.Flower[2].transform.GetChild(1).gameObject.SetActive(false);
+        //     AG.Flower[3].transform.GetChild(1).gameObject.SetActive(false);
+        // }
     }
     public void SlashAppear(){
-        Slash.SetActive(true);
+        AG.slashV1.SetActive(true);
     }
     public void DOV_VFX(){
-        DV_VFX.SetActive(true);
+        AG.DV_HitEffect.SetActive(true);
     }
     public void DOV_V2(){
         AG.slashOut = true;
-        DV_VFX_Stay.SetActive(true);
+        AG.slashV2_2.SetActive(true);
+    }
+    public void EmitPollen(){
+        // if(AG.Flower.Count>3){
+        // AG.Flower[0].transform.GetChild(1).gameObject.SetActive(true);
+        // AG.Flower[1].transform.GetChild(1).gameObject.SetActive(true);
+        // AG.Flower[2].transform.GetChild(1).gameObject.SetActive(true);
+        // AG.Flower[3].transform.GetChild(1).gameObject.SetActive(true);
+        // }
     }
 }
