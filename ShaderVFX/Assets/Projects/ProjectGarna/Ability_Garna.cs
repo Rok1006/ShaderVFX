@@ -51,6 +51,7 @@ public class Ability_Garna : MonoBehaviour
     public GameObject[] Location;
     public bool[] ready;
     public List<GameObject> Flower = new List<GameObject>();
+    public List<GameObject> Lance = new List<GameObject>();
 
     void Start()
     {
@@ -64,7 +65,11 @@ public class Ability_Garna : MonoBehaviour
         Lines_BK.SetActive(false);
         Lines_FR.SetActive(false);
         groundFlower.SetActive(false);
-        
+
+        Location[0].transform.GetChild(0).gameObject.SetActive(false);
+        Location[1].transform.GetChild(0).gameObject.SetActive(false);
+        Location[2].transform.GetChild(0).gameObject.SetActive(false);
+        Location[3].transform.GetChild(0).gameObject.SetActive(false);
 
         lanceAnim = lance.GetComponent<Animator>();
     }
@@ -88,6 +93,7 @@ public class Ability_Garna : MonoBehaviour
         }
         if(Input.GetKeyDown(input_BloomingGold_v1)){
             StartCoroutine("BloomingGold"); 
+            StartCoroutine("BloomingGold_Lance"); 
         }
 //-----------------------
         if(needle.Count>0&&needle[0]!=null&&needle[0].GetComponent<Stinger>().arrived){
@@ -108,6 +114,20 @@ public class Ability_Garna : MonoBehaviour
         }
         if(slashOut){
             SlashOut();
+        }
+        if(Lance.Count>3){
+            if(ready[0]==true){
+                LanceOut(Lance[0]);
+            } 
+            if(ready[1]==true){
+                LanceOut(Lance[1]);
+            }
+            if(ready[2]==true){
+                LanceOut(Lance[2]);
+            }
+            if(ready[3]==true){
+                LanceOut(Lance[3]);
+            }
         }
     }
 //Ability - Stinger
@@ -195,23 +215,37 @@ public class Ability_Garna : MonoBehaviour
 //Ability - Blooming Gold
     IEnumerator BloomingGold(){
         yield return new WaitForSeconds(0f);
+        Location[0].transform.GetChild(0).gameObject.SetActive(true);
+        RandomZ();
+        yield return new WaitForSeconds(.5f);
+
         groundFlower.SetActive(true);
         GenerateSmallFlowers();
-        RandomZ();
-
         GenerateFlowers(0,.7f);
+        Location[1].transform.GetChild(0).gameObject.SetActive(true);
         yield return new WaitForSeconds(.5f);
         GenerateFlowers(1,.8f);
+        Location[2].transform.GetChild(0).gameObject.SetActive(true);
         yield return new WaitForSeconds(.5f);
         GenerateFlowers(2,.9f);
+        Location[3].transform.GetChild(0).gameObject.SetActive(true);
         yield return new WaitForSeconds(.5f);
         GenerateFlowers(3,1);
-        
+    }
+    IEnumerator BloomingGold_Lance(){
+        yield return new WaitForSeconds(1.5f);
+        ready[0] = true;
+        yield return new WaitForSeconds(1f);
+        ready[1] = true;
+        yield return new WaitForSeconds(.5f);
+        ready[2] = true;
+        yield return new WaitForSeconds(.5f);
+        ready[3] = true;
     }
     void GenerateSmallFlowers(){
         for(int i = 0; i<10; i++){
             float ranS = Random.Range(0.05f, 0.3f);
-            Vector3 location = new Vector3(Random.Range(-14, 14), 3.36f ,Random.Range(-4, 4));
+            Vector3 location = new Vector3(Random.Range(-14, 14), 3.19f ,Random.Range(-4, 4));
             GameObject f0 = Instantiate(smallFlowerPrefab, location, Quaternion.identity);
             f0.transform.localScale = new Vector3(ranS,ranS,ranS);
         }
@@ -227,6 +261,7 @@ public class Ability_Garna : MonoBehaviour
         GameObject pt = flower.transform.GetChild(2).gameObject;
         GameObject L = Instantiate(lancePrefab, pt.transform.position, Quaternion.identity);
         L.transform.rotation = Quaternion.Euler(90f, 0f, 0f);
+        Lance.Add(L);
         // ready[i] = true;
     }
     private void RandomZ(){
@@ -240,7 +275,7 @@ public class Ability_Garna : MonoBehaviour
         Location[3].transform.position = new Vector3(Location[3].transform.position.x, Location[3].transform.position.y, r3);
     }
     void LanceOut(GameObject a){
-        a.transform.Translate(Vector3.left * BG_speed * Time.deltaTime);
+        a.transform.Translate(-Vector3.forward * BG_speed * Time.deltaTime);
     }
     void Reset(){
        //trim clear list

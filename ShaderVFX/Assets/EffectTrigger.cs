@@ -42,4 +42,10 @@ public class EffectTrigger : MonoBehaviour
         // AG.Flower[3].transform.GetChild(1).gameObject.SetActive(true);
         // }
     }
+    public void LanceOut(){
+        // AG.ready[0] = true;
+        // AG.ready[1] = true;
+        // AG.ready[2] = true;
+        // AG.ready[3] = true;
+    }
 }
